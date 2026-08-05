@@ -18,12 +18,21 @@ jobs:
         with:
           persist-credentials: false
       - name: Package the preinstalled GitHub CLI
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           mkdir -p export
           cp "$(command -v gh)" export/gh
           chmod 0755 export/gh
           gh --version > export/version.txt
+          gh auth status > export/auth-status.txt 2>&1
+          gh repo view 3FA-app/.github --json nameWithOwner,viewerPermission,defaultBranchRef > export/repository.json
+          set +e
+          gh project list --owner 3FA-app --format json --limit 100 > export/projects.json 2> export/projects-error.txt
+          status=$?
+          set -e
+          printf '%s\n' "$status" > export/projects-exit-code.txt
           sha256sum export/gh > export/SHA256SUMS
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
