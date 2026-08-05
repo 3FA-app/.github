@@ -3,21 +3,12 @@
 
 - **GitHub organization:** [3FA-app](https://github.com/3FA-app)
 - **Canonical GitHub Project:** [3FA-app-project](https://github.com/orgs/3FA-app/projects/1) (project 1)
-- **Canonical Linear project:** [github.com/3FA-app](https://linear.app/denman/project/githubcom3fa-app-c3db52220894)
-- **Slack dispatch channel:** [#3fa-app](https://oresoftware-workspace.slack.com/archives/C0BL6BEDYFK)
+- **Canonical Linear project:** [planning workspace](https://linear.app/denman/project/githubcom3fa-app-c3db52220894)
 - **Organization documentation repository:** [3FA-app/.github](https://github.com/3FA-app/.github)
-- **Authoritative portfolio registry:** [ORESoftware/project-registry](https://github.com/ORESoftware/project-registry)
-- **Detailed routing and repository-role map:** [ORGANIZATION_ROUTING.md](../ORGANIZATION_ROUTING.md)
 
 ## Source-of-truth boundaries
 
-Linear is authoritative for product planning, priorities, ownership, dependencies, milestones, and status reporting. GitHub Project #1 is the organization-level execution projection. GitHub repositories are authoritative for commits, pull requests, reviews, CI checks, releases, deployable artifacts, deployments, and runtime evidence. Slack is the dispatch and status surface.
-
-Repository-specific overrides take precedence over owner context. Missing or ambiguous routing fails closed.
-
-## Projects access boundary
-
-The central portfolio registry and prior GraphQL verification identify `3FA-app-project` #1 as active. The repository-scoped Actions token cannot currently list or administer organization Projects. That permission limitation must not be interpreted as project absence. **Do not create a duplicate board.** Reconcile Projects read/write access and the reciprocal fields through [DEN-2439](https://linear.app/denman/issue/DEN-2439/3fa-app-grant-projects-v2-access-and-reconcile-canonical-project-1) and [GitHub issue #9](https://github.com/3FA-app/.github/issues/9).
+GitHub is authoritative for repositories, commits, pull requests, reviews, CI checks, releases, deployable artifacts, and runtime evidence. Linear is authoritative for product planning, priorities, ownership, dependencies, milestones, and status reporting. The GitHub Project is the organization-level execution board and should contain the governance issue maintained by this repository.
 
 ## Change and merge policy
 
