@@ -10,6 +10,8 @@
 
 GitHub is authoritative for repositories, commits, pull requests, reviews, CI checks, releases, deployable artifacts, and runtime evidence. Linear is authoritative for product planning, priorities, ownership, dependencies, milestones, and status reporting. The GitHub Project is the organization-level execution board and should contain the governance issue maintained by this repository.
 
+Do not create a duplicate GitHub Project; [`3FA-app-project`](https://github.com/orgs/3FA-app/projects/1) is the canonical organization execution board, and `DEN-2439` is its governance record.
+
 ## Change and merge policy
 
 Documentation branches must be reviewed through pull requests and merged after checks pass. Concurrent edits are reconciled semantically against the latest default branch: this managed routing block is regenerated while all unrelated prose outside the block is preserved. Do not resolve conflicts by blindly choosing one side.
