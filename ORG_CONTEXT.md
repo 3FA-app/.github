@@ -1,5 +1,24 @@
-# Organization context
+# 3FA-app organization context
 
-Organization: **3FA-app**
+Verified: **2026-08-05**
 
-This file is intentionally conservative. Project-specific product goals, Linear project IDs, Slack channels, deployment environments, and secrets must be recorded only after they are verified from their canonical systems. Do not fabricate missing links or identifiers.
+## Canonical identifiers
+
+- GitHub organization: [`3FA-app`](https://github.com/3FA-app)
+- GitHub owner ID: `292943121`
+- GitHub owner type: `Organization`
+- GitHub Project: [`3FA-app-project`](https://github.com/orgs/3FA-app/projects/1), project `1`, recorded active by the central registry and prior GraphQL verification
+- Linear project: [`github.com/3FA-app`](https://linear.app/denman/project/githubcom3fa-app-c3db52220894)
+- Linear project ID: `4aff8a2b-092b-40c8-8af6-820e1538c4a7`
+- Linear team: Denman (`DEN`), ID `eb8ab169-5afe-4b6f-9cab-3f2aa3e887dc`
+- Slack channel: [`#3fa-app`](https://oresoftware-workspace.slack.com/archives/C0BL6BEDYFK), ID `C0BL6BEDYFK`
+
+## Authority and routing
+
+[`ORESoftware/project-registry`](https://github.com/ORESoftware/project-registry) is authoritative for owner-to-Linear and portfolio-link routing. [`organization-routing.json`](organization-routing.json) is the tested org-local projection. Repository overrides take precedence over owner context; unresolved or ambiguous routing is rejected.
+
+Linear owns planning and dependencies. GitHub Project #1 is the cross-repository execution view. GitHub repositories own code, reviews, checks, releases, artifacts, and runtime evidence. Slack is the dispatch and status surface.
+
+The current repository-scoped Actions token cannot inspect or administer organization Projects. This is an automation-permission gap, not evidence that Project #1 is absent. Do not create a duplicate board; reconcile access through [DEN-2439](https://linear.app/denman/issue/DEN-2439/3fa-app-grant-projects-v2-access-and-reconcile-canonical-project-1) and [GitHub issue #9](https://github.com/3FA-app/.github/issues/9).
+
+See [ORGANIZATION_ROUTING.md](ORGANIZATION_ROUTING.md) for the complete 13-repository role map and operating contract.

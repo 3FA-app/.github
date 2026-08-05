@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/3FA-app/.github/raw/main/schema/organization-routing.schema.json",
+  "title": "ThreeFaOrganizationRouting",
+  "description": "Reciprocal, fail-closed projection of the authoritative 3FA-app GitHub, Linear, Slack, GitHub Project, and repository-role mapping.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schemaVersion", "verifiedAt", "authority", "routingPolicy", "github", "linear", "slack", "repositories"],
+  "properties": {
+    "$schema": { "const": "./schema/organization-routing.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "verifiedAt": { "type": "string", "format": "date" },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ownerRegistry", "portfolioLinks", "localProjection"],
+      "properties": {
+        "ownerRegistry": { "type": "string", "format": "uri" },
+        "portfolioLinks": { "type": "string", "format": "uri" },
+        "localProjection": { "type": "string", "format": "uri" }
+      }
+    },
+    "routingPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["precedence", "unresolved", "ambiguous"],
+      "properties": {
+        "precedence": { "const": ["repositoryOverride", "ownerContext"] },
+        "unresolved": { "const": "reject" },
+        "ambiguous": { "const": "reject" }
+      }
+    },
+    "github": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["organization", "project"],
+      "properties": {
+        "organization": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["login", "id", "type", "url"],
+          "properties": {
+            "login": { "const": "3FA-app" },
+            "id": { "const": 292943121 },
+            "type": { "const": "Organization" },
+            "url": { "const": "https://github.com/3FA-app" }
+          }
+        },
+        "project": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["number", "title", "url", "status", "verificationSource", "automationAccess", "trackingIssue", "linearIssue"],
+          "properties": {
+            "number": { "const": 1 },
+            "title": { "const": "3FA-app-project" },
+            "url": { "const": "https://github.com/orgs/3FA-app/projects/1" },
+            "status": { "const": "active" },
+            "verificationSource": { "const": "central-registry-and-graphql" },
+            "automationAccess": { "enum": ["verified", "insufficient"] },
+            "trackingIssue": { "const": "https://github.com/3FA-app/.github/issues/9" },
+            "linearIssue": { "const": "DEN-2439" }
+          }
+        }
+      }
+    },
+    "linear": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["workspaceSlug", "projectId", "projectName", "projectUrl", "teamId", "teamKey"],
+      "properties": {
+        "workspaceSlug": { "const": "denman" },
+        "projectId": { "const": "4aff8a2b-092b-40c8-8af6-820e1538c4a7" },
+        "projectName": { "const": "github.com/3FA-app" },
+        "projectUrl": { "const": "https://linear.app/denman/project/githubcom3fa-app-c3db52220894" },
+        "teamId": { "const": "eb8ab169-5afe-4b6f-9cab-3f2aa3e887dc" },
+        "teamKey": { "const": "DEN" }
+      }
+    },
+    "slack": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["workspaceId", "channelId", "channelName", "channelUrl"],
+      "properties": {
+        "workspaceId": { "const": "T01B3C83PMK" },
+        "channelId": { "const": "C0BL6BEDYFK" },
+        "channelName": { "const": "3fa-app" },
+        "channelUrl": { "const": "https://oresoftware-workspace.slack.com/archives/C0BL6BEDYFK" }
+      }
+    },
+    "repositories": {
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 13,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "fullName", "role"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "fullName": { "type": "string", "pattern": "^3FA-app/[^/]+$" },
+          "role": { "enum": ["governance", "interfaces", "clients", "backend", "web", "desktop", "sync", "infra", "e2e", "mcp", "website", "extension", "monorepo"] }
+        }
+      }
+    }
+  }
+}
