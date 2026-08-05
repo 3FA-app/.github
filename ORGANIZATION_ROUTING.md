@@ -2,7 +2,7 @@
 
 Verified: **2026-08-05**
 
-This document is the human-readable reciprocal projection of the authoritative portfolio records in [`ORESoftware/project-registry`](https://github.com/ORESoftware/project-registry). The machine-readable local projection is [`organization-routing.json`](organization-routing.json).
+This document is the human-readable reciprocal projection of the authoritative portfolio records in [`approved-private-registry`](private-registry://canonical). The machine-readable local projection is [`organization-routing.json`](organization-routing.json).
 
 ## Canonical identity
 
