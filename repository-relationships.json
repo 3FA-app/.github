@@ -1,10 +1,138 @@
 {
+  "$schema": "./repository-relationships.schema.json",
+  "audience": "public",
+  "generated": {
+    "complete_for_visibility": "public",
+    "generated_at": "2026-08-05T21:07:32Z",
+    "generator_version": "2026-08-04.1",
+    "inventory_digest": "sha256:1898a1e63e5ed5eb8fbc91d1541633814383679bfd7b8dc4036048069116453c",
+    "managed_by": "ore-repository-relationship-rollout",
+    "omitted_repository_count": 10,
+    "private_repositories_omitted": true,
+    "source": "GitHub GraphQL repository inventory plus reviewed manual declarations"
+  },
+  "owner": {
+    "account_type": "organization",
+    "dotgithub_repository": "3FA-app/.github",
+    "github_id": "292943121",
+    "linear_project": {
+      "id": "4aff8a2b-092b-40c8-8af6-820e1538c4a7",
+      "name": "github.com/3FA-app",
+      "team_id": "eb8ab169-5afe-4b6f-9cab-3f2aa3e887dc",
+      "url": "https://linear.app/denman/project/githubcom3fa-app-c3db52220894",
+      "workspace": "denman"
+    },
+    "login": "3FA-app",
+    "mapping_id": "context:3fa-app"
+  },
+  "private_registry": {
+    "contains_non_public_inventory": true,
+    "digest": "sha256:47390ca41af29b5b1d7555a67fdbf57622974db073096a617c628ece8aba38a6",
+    "path": "owners/3FA-app.json",
+    "repository": "ORESoftware/project-registry"
+  },
+  "relationships": [
+    {
+      "confidence": 1.0,
+      "evidence": [
+        {
+          "kind": "github-owner-membership",
+          "source": "GitHub GraphQL repository inventory"
+        }
+      ],
+      "from": "3FA-app/.github",
+      "id": "sha256:7fe7721c916fe10d8d136f7c70b206e971bd07ccd39684d58a00ccec4fec5e0f",
+      "notes": "Organization .github policy and community-health defaults govern this sibling repository.",
+      "required": true,
+      "scope": "organization",
+      "status": "declared",
+      "to": "3FA-app/3fa-app.github.io",
+      "type": "governs"
+    },
+    {
+      "confidence": 1.0,
+      "evidence": [
+        {
+          "kind": "github-owner-membership",
+          "source": "GitHub GraphQL repository inventory"
+        }
+      ],
+      "from": "3FA-app/.github",
+      "id": "sha256:fc7af85157b013cffc33ef5d47477c81c22a3ad5ac2a0852f5c5af8abb1b6943",
+      "notes": "Organization .github policy and community-health defaults govern this sibling repository.",
+      "required": true,
+      "scope": "organization",
+      "status": "declared",
+      "to": "3FA-app/3FA-desktop.rs",
+      "type": "governs"
+    },
+    {
+      "confidence": 0.95,
+      "evidence": [
+        {
+          "kind": "repository-name",
+          "value": "3fa-app.github.io"
+        }
+      ],
+      "from": "3FA-app/3fa-app.github.io",
+      "id": "sha256:c2b340d8fbbcd385d586281bee4fc02423f69bc80f1405c9eca508e9247a55ba",
+      "notes": "The conventional *.github.io repository documents the organization profile.",
+      "required": false,
+      "scope": "organization",
+      "status": "inferred",
+      "to": "3FA-app/.github",
+      "type": "documents"
+    }
+  ],
+  "repositories": [
+    {
+      "archived": false,
+      "default_branch": "main",
+      "fork": false,
+      "full_name": "3FA-app/.github",
+      "github_id": "1324046697",
+      "name": ".github",
+      "owner": "3FA-app",
+      "roles": [
+        "community-health",
+        "governance",
+        "relationship-registry"
+      ],
+      "source": "github-graphql-api",
+      "url": "https://github.com/3FA-app/.github",
+      "visibility": "public"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "fork": false,
+      "full_name": "3FA-app/3fa-app.github.io",
+      "github_id": "1266785153",
+      "name": "3fa-app.github.io",
+      "owner": "3FA-app",
+      "roles": [
+        "documentation-site"
+      ],
+      "source": "github-graphql-api",
+      "url": "https://github.com/3FA-app/3fa-app.github.io",
+      "visibility": "public"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "fork": false,
+      "full_name": "3FA-app/3FA-desktop.rs",
+      "github_id": "1266785171",
+      "name": "3FA-desktop.rs",
+      "owner": "3FA-app",
+      "roles": [
+        "repository"
+      ],
+      "source": "github-graphql-api",
+      "url": "https://github.com/3FA-app/3FA-desktop.rs",
+      "visibility": "public"
+    }
+  ],
   "schema_version": 1,
-  "organization": "3FA-app",
-  "generated_at": null,
-  "repositories": [],
-  "notes": [
-    "Populate from live GitHub inventory; do not infer unverified dependencies.",
-    "Repository-local manifests remain authoritative for exact dependency versions."
-  ]
+  "unresolved_hints": []
 }
