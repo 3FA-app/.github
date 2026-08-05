@@ -1,0 +1,65 @@
+{
+  "$schema": "./schema/organization-routing.schema.json",
+  "schemaVersion": 1,
+  "verifiedAt": "2026-08-05",
+  "authority": {
+    "ownerRegistry": "https://github.com/ORESoftware/project-registry/blob/main/registry/project-contexts.json",
+    "portfolioLinks": "https://github.com/ORESoftware/project-registry/blob/main/registry/portfolio-links.csv",
+    "localProjection": "https://github.com/3FA-app/.github/blob/main/organization-routing.json"
+  },
+  "routingPolicy": {
+    "precedence": [
+      "repositoryOverride",
+      "ownerContext"
+    ],
+    "unresolved": "reject",
+    "ambiguous": "reject"
+  },
+  "github": {
+    "organization": {
+      "login": "3FA-app",
+      "id": 292943121,
+      "type": "Organization",
+      "url": "https://github.com/3FA-app"
+    },
+    "project": {
+      "number": 1,
+      "title": "3FA-app-project",
+      "url": "https://github.com/orgs/3FA-app/projects/1",
+      "status": "active",
+      "verificationSource": "central-registry-and-graphql",
+      "automationAccess": "insufficient",
+      "trackingIssue": "https://github.com/3FA-app/.github/issues/9",
+      "linearIssue": "DEN-2439"
+    }
+  },
+  "linear": {
+    "workspaceSlug": "denman",
+    "projectId": "4aff8a2b-092b-40c8-8af6-820e1538c4a7",
+    "projectName": "github.com/3FA-app",
+    "projectUrl": "https://linear.app/denman/project/githubcom3fa-app-c3db52220894",
+    "teamId": "eb8ab169-5afe-4b6f-9cab-3f2aa3e887dc",
+    "teamKey": "DEN"
+  },
+  "slack": {
+    "workspaceId": "T01B3C83PMK",
+    "channelId": "C0BL6BEDYFK",
+    "channelName": "3fa-app",
+    "channelUrl": "https://oresoftware-workspace.slack.com/archives/C0BL6BEDYFK"
+  },
+  "repositories": [
+    { "name": ".github", "fullName": "3FA-app/.github", "role": "governance" },
+    { "name": "3fa-interfaces", "fullName": "3FA-app/3fa-interfaces", "role": "interfaces" },
+    { "name": "3fa-clients", "fullName": "3FA-app/3fa-clients", "role": "clients" },
+    { "name": "3fa-backend.rs", "fullName": "3FA-app/3fa-backend.rs", "role": "backend" },
+    { "name": "3fa-web-server.rs", "fullName": "3FA-app/3fa-web-server.rs", "role": "web" },
+    { "name": "3FA-desktop.rs", "fullName": "3FA-app/3FA-desktop.rs", "role": "desktop" },
+    { "name": "3fa-app-sync", "fullName": "3FA-app/3fa-app-sync", "role": "sync" },
+    { "name": "3fa-infra", "fullName": "3FA-app/3fa-infra", "role": "infra" },
+    { "name": "3fa-app-e2e", "fullName": "3FA-app/3fa-app-e2e", "role": "e2e" },
+    { "name": "3FA-mcp-server.rs", "fullName": "3FA-app/3FA-mcp-server.rs", "role": "mcp" },
+    { "name": "3fa-app.github.io", "fullName": "3FA-app/3fa-app.github.io", "role": "website" },
+    { "name": "3fa-app-chrome-extension", "fullName": "3FA-app/3fa-app-chrome-extension", "role": "extension" },
+    { "name": "threefa-monorepo", "fullName": "3FA-app/threefa-monorepo", "role": "monorepo" }
+  ]
+}
