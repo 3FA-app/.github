@@ -1,0 +1,33 @@
+name: export-gh-cli
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/export-gh-cli.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Package the preinstalled GitHub CLI
+        run: |
+          set -euo pipefail
+          mkdir -p export
+          cp "$(command -v gh)" export/gh
+          chmod 0755 export/gh
+          gh --version > export/version.txt
+          sha256sum export/gh > export/SHA256SUMS
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: gh-linux-amd64
+          path: export/
+          if-no-files-found: error
+          retention-days: 1
