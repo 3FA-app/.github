@@ -15,7 +15,7 @@ Verified: **2026-08-05**
 
 ## Authority and routing
 
-[`ORESoftware/project-registry`](https://github.com/ORESoftware/project-registry) is authoritative for owner-to-Linear and portfolio-link routing. [`organization-routing.json`](organization-routing.json) is the tested org-local projection. Repository overrides take precedence over owner context; unresolved or ambiguous routing is rejected.
+[`approved-private-registry`](private-registry://canonical) is authoritative for owner-to-Linear and portfolio-link routing. [`organization-routing.json`](organization-routing.json) is the tested org-local projection. Repository overrides take precedence over owner context; unresolved or ambiguous routing is rejected.
 
 Linear owns planning and dependencies. GitHub Project #1 is the cross-repository execution view. GitHub repositories own code, reviews, checks, releases, artifacts, and runtime evidence. Slack is the dispatch and status surface.
 

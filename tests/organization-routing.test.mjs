@@ -47,10 +47,12 @@ test('the repository family is complete, unique, and role-aligned', () => {
   assert.deepEqual([...routing.repositories.map(({ name }) => name)].sort(), [...expectedRepositories.keys()].sort());
 });
 
-test('the local projection names the central registry as authority', () => {
-  assert.match(routing.authority.ownerRegistry, /ORESoftware\/project-registry\/blob\/main\/registry\/project-contexts\.json$/u);
-  assert.match(routing.authority.portfolioLinks, /ORESoftware\/project-registry\/blob\/main\/registry\/portfolio-links\.csv$/u);
+test('the local projection uses an opaque locator for the central registry authority', () => {
+  assert.equal(routing.authority.ownerRegistry, 'private-registry://canonical/registry/project-contexts.json');
+  assert.equal(routing.authority.portfolioLinks, 'private-registry://canonical/registry/portfolio-links.csv');
   assert.match(routing.authority.localProjection, /3FA-app\/\.github\/blob\/main\/organization-routing\.json$/u);
+  const forbiddenPrivateRepository = ['ORESoftware', 'project-registry'].join('/');
+  assert.equal(JSON.stringify(routing).includes(forbiddenPrivateRepository), false);
 });
 
 test('schema pins the same canonical identities and exact inventory size', () => {

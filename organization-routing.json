@@ -3,8 +3,8 @@
   "schemaVersion": 1,
   "verifiedAt": "2026-08-05",
   "authority": {
-    "ownerRegistry": "https://github.com/ORESoftware/project-registry/blob/main/registry/project-contexts.json",
-    "portfolioLinks": "https://github.com/ORESoftware/project-registry/blob/main/registry/portfolio-links.csv",
+    "ownerRegistry": "private-registry://canonical/registry/project-contexts.json",
+    "portfolioLinks": "private-registry://canonical/registry/portfolio-links.csv",
     "localProjection": "https://github.com/3FA-app/.github/blob/main/organization-routing.json"
   },
   "routingPolicy": {

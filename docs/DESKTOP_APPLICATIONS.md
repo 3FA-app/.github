@@ -33,7 +33,7 @@ Completion in Rust is not full desktop parity while the current Flutter implemen
 
 - GitHub Project: [`3FA-app-project` — Project 1](https://github.com/orgs/3FA-app/projects/1)
 - Linear project: `github.com/3FA-app`
-- Central registry: [`ORESoftware/project-registry`](https://github.com/ORESoftware/project-registry/blob/main/registry/desktop-applications.json)
+- Central registry: [`approved-private-registry`](private-registry://canonical/registry/desktop-applications.json)
 - Portfolio rollout: [`DEN-2469`](https://linear.app/denman/issue/DEN-2469/roll-out-paired-rust-flutter-desktop-repositories-across-the-portfolio)
 
 The central registry intentionally records the organization-owned target repository. This document and the repository-local contracts record the current cross-owner implementation during migration.

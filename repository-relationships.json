@@ -29,7 +29,7 @@
     "contains_non_public_inventory": true,
     "digest": "sha256:47390ca41af29b5b1d7555a67fdbf57622974db073096a617c628ece8aba38a6",
     "path": "owners/3FA-app.json",
-    "repository": "ORESoftware/project-registry"
+    "repository": "approved-private-registry"
   },
   "relationships": [
     {
