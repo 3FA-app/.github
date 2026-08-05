@@ -49,12 +49,28 @@ Documentation branches must be reviewed through pull requests and merged after c
 
 Stale Dependabot branches `#19` and `#21` were closed only after their valid intent was rebuilt on current `main`. The replacements preserve newer runtime exports and immutable-action policy rather than mechanically rebasing obsolete file versions.
 
+### Declared Opto Sync boundary
+
+Pull request `3fa-clients#28` merged as `8c60b9d6ffc1fac7096014a9d2fbf5be46480cbc` and records a metadata-only Opto Sync adoption boundary at rollout phase `declared`.
+
+The manifest:
+
+- pins `opto-sync/opto-sync-clients` version `0.2.0` at immutable commit `068414c8ff7d4262d0a395959b5209d5908f0fcc`;
+- declares Dart, Gleam, Rust, and TypeScript surfaces;
+- scopes synchronization to device-directory state, encrypted-message metadata, key-bundle metadata, and causal checkpoints;
+- declares IndexedDB/SQLite and HTTP/WebSocket/Supabase Realtime expectations;
+- requires authenticated transport, encrypted local storage, tombstones, timestamp reconciliation, and keyed array merging;
+- explicitly excludes private keys, OTP seeds, plaintext message content, passwords, and access/refresh tokens.
+
+The declaration does not claim a queue, transport implementation, key-material synchronization, or production readiness. Linear issue `DEN-2459` records the completed declaration. Advance to `local-queue` only after restart, duplicate-delivery, stale-update, tombstone/delete, concurrent-device, and causal-replay fixtures are enforced.
+
 ### Active project lanes
 
 1. **Publish immutable interfaces (`DEN-320`).** Decide licensing/visibility, publish `threefa-interfaces`, restore genuine Rust crates.io and Dart pub.dev routes, and record artifact provenance.
-2. **Local OTP transfer.** Coordinate client issue `3fa-clients#4` with backend issue `3fa-backend.rs#7`; treat Bluetooth/Wi-Fi discovery, user-presence approval, encryption, and platform bridges as a multi-repository feature rather than an HTTP SDK shortcut.
-3. **Actions admission and execution evidence.** A workflow marked failed with no job steps is runner-allocation evidence, not a test failure. Project status must record whether checks executed before calling a branch green or red.
-4. **Release artifacts.** A release is complete only when packed artifacts, native dry-runs, checksums/provenance, and clean-consumer installation evidence map to one reviewed commit.
+2. **Implement the declared Opto Sync metadata boundary.** Build durable metadata queues and multi-device replay/concurrency proof under a follow-up to `DEN-2459`; do not synchronize private keys, OTP seeds, plaintext, passwords, or tokens.
+3. **Local OTP transfer.** Coordinate client issue `3fa-clients#4` with backend issue `3fa-backend.rs#7`; treat Bluetooth/Wi-Fi discovery, user-presence approval, encryption, and platform bridges as a multi-repository feature rather than an HTTP SDK shortcut.
+4. **Actions admission and execution evidence.** A workflow marked failed with no job steps is runner-allocation evidence, not a test failure. Project status must record whether checks executed before calling a branch green or red.
+5. **Release artifacts.** A release is complete only when packed artifacts, native dry-runs, checksums/provenance, and clean-consumer installation evidence map to one reviewed commit.
 
 ### Board hygiene
 
