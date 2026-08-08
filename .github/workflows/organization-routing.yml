@@ -10,7 +10,10 @@ on:
       - "organization-routing.json"
       - "profile/README.md"
       - "schema/organization-routing.schema.json"
+      - "schema/project-registry-artifact.schema.json"
+      - "scripts/build-project-registry.py"
       - "tests/organization-routing.test.mjs"
+      - "tests/test_project_registry.py"
       - ".github/workflows/**"
   push:
     branches: [main]
@@ -22,7 +25,10 @@ on:
       - "organization-routing.json"
       - "profile/README.md"
       - "schema/organization-routing.schema.json"
+      - "schema/project-registry-artifact.schema.json"
+      - "scripts/build-project-registry.py"
       - "tests/organization-routing.test.mjs"
+      - "tests/test_project_registry.py"
       - ".github/workflows/**"
   schedule:
     - cron: "37 8 * * 3"
@@ -48,12 +54,15 @@ jobs:
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "22.22.1"
-      - name: Parse routing JSON and schema
+      - name: Parse routing JSON and schemas
         run: |
           set -euo pipefail
           node -e 'JSON.parse(require("node:fs").readFileSync("organization-routing.json", "utf8"))'
           node -e 'JSON.parse(require("node:fs").readFileSync("schema/organization-routing.schema.json", "utf8"))'
+          node -e 'JSON.parse(require("node:fs").readFileSync("schema/project-registry-artifact.schema.json", "utf8"))'
       - name: Run organization routing contracts
         run: node --test tests/organization-routing.test.mjs
+      - name: Run project registry contracts
+        run: python3 -m unittest discover -s tests -p 'test_project_registry.py' -v
       - name: Prove verification leaves the checkout unchanged
         run: git diff --exit-code -- .
