@@ -64,7 +64,7 @@ Shared schemas, clients, cryptographic test vectors, route fixtures, device-stat
 
 - Rust companion and migration guidance: [`3FA-app/3FA-desktop.rs` PR #22](https://github.com/3FA-app/3FA-desktop.rs/pull/22)
 - Current Flutter companion guidance: [`ORESoftware/3fa-client-ui.dart` PR #14](https://github.com/ORESoftware/3fa-client-ui.dart/pull/14)
-- Central toolkit assignments: [`rust-desktop-strategies.md`](https://github.com/ORESoftware/project-registry/blob/main/docs/rust-desktop-strategies.md)
+- Central toolkit assignments: `private-registry://canonical/registry/rust-desktop-strategies.md`
 
 ## Project routing
 
