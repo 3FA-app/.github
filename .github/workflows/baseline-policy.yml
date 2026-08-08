@@ -30,6 +30,13 @@ jobs:
             CODE_OF_CONDUCT.md
             GOVERNANCE.md
             AGENTS.md
+            ORGANIZATION_ROUTING.md
+            organization-routing.json
+            docs/PROJECTS.md
+            schema/organization-routing.schema.json
+            schema/project-registry-artifact.schema.json
+            scripts/build-project-registry.py
+            tests/test_project_registry.py
             repository-relationships.json
             organization-policy.json
           )
@@ -37,5 +44,9 @@ jobs:
             test -s "$file" || { echo "::error file=$file::required baseline file is missing or empty"; exit 1; }
           done
           python3 -m json.tool organization-policy.json >/dev/null
+          python3 -m json.tool organization-routing.json >/dev/null
           python3 -m json.tool repository-relationships.json >/dev/null
+          python3 -m json.tool schema/organization-routing.schema.json >/dev/null
+          python3 -m json.tool schema/project-registry-artifact.schema.json >/dev/null
+          python3 -m unittest discover -s tests -p 'test_project_registry.py' -v
           ! git grep -nE '^(<<<<<<<|=======|>>>>>>>)' -- . ':!*.lock'
