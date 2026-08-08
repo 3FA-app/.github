@@ -1,7 +1,7 @@
 {
   "$schema": "./schema/organization-routing.schema.json",
   "schemaVersion": 1,
-  "verifiedAt": "2026-08-05",
+  "verifiedAt": "2026-08-08",
   "authority": {
     "ownerRegistry": "private-registry://canonical/registry/project-contexts.json",
     "portfolioLinks": "private-registry://canonical/registry/portfolio-links.csv",
@@ -51,6 +51,7 @@
     { "name": ".github", "fullName": "3FA-app/.github", "role": "governance" },
     { "name": "3fa-interfaces", "fullName": "3FA-app/3fa-interfaces", "role": "interfaces" },
     { "name": "3fa-clients", "fullName": "3FA-app/3fa-clients", "role": "clients" },
+    { "name": "3FA-app-cli", "fullName": "3FA-app/3FA-app-cli", "role": "cli" },
     { "name": "3fa-backend.rs", "fullName": "3FA-app/3fa-backend.rs", "role": "backend" },
     { "name": "3fa-web-server.rs", "fullName": "3FA-app/3fa-web-server.rs", "role": "web" },
     { "name": "3FA-desktop.rs", "fullName": "3FA-app/3FA-desktop.rs", "role": "desktop" },
