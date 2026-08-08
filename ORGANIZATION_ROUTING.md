@@ -1,6 +1,6 @@
 # Organization routing
 
-Verified: **2026-08-05**
+Verified: **2026-08-08**
 
 This document is the human-readable reciprocal projection of the authoritative portfolio records in [`approved-private-registry`](private-registry://canonical). The machine-readable local projection is [`organization-routing.json`](organization-routing.json).
 
@@ -41,7 +41,17 @@ gh project field-list 1 --owner 3FA-app --format json --limit 100
 gh project item-list 1 --owner 3FA-app --format json --limit 100
 ```
 
-The board should contain exactly one reciprocal field for `Linear issue`, `Linear project`, and `Repository role`.
+The board should contain exactly one reciprocal field for `Linear issue`, `Linear project`, and `Repository role`. The `Repository role` options are `governance`, `interfaces`, `clients`, `cli`, `backend`, `web`, `desktop`, `sync`, `infra`, `e2e`, `mcp`, `website`, `extension`, and `monorepo`.
+
+## Published project registry artifact
+
+[`scripts/build-project-registry.py`](scripts/build-project-registry.py) deterministically projects `organization-routing.json` into a public-safe registry bundle:
+
+- `3fa-app-project-registry.json` — machine-readable reciprocal identity and repository-role projection;
+- `3fa-app-project-registry.md` — human-readable GitHub, Linear, Slack, Project, and repository mapping;
+- `SHA256SUMS` — checksums for both documents.
+
+[`.github/workflows/project-registry-artifact.yml`](.github/workflows/project-registry-artifact.yml) validates the routing and artifact schemas, runs the regression suite, builds the bundle, verifies the checksums, and uploads the bundle as a GitHub Actions artifact on pull requests, `main`, schedule, and manual dispatch. The artifact contains no credentials and does not administer Project #1.
 
 ## Repository roles
 
@@ -50,6 +60,7 @@ The board should contain exactly one reciprocal field for `Linear issue`, `Linea
 | [`3FA-app/.github`](https://github.com/3FA-app/.github) | `governance` | organization policy, routing, community health, and reciprocal documentation |
 | [`3FA-app/3fa-interfaces`](https://github.com/3FA-app/3fa-interfaces) | `interfaces` | schemas and cross-language wire contracts |
 | [`3FA-app/3fa-clients`](https://github.com/3FA-app/3fa-clients) | `clients` | generated and hand-written client SDKs |
+| [`3FA-app/3FA-app-cli`](https://github.com/3FA-app/3FA-app-cli) | `cli` | command-line operations and scriptable local automation |
 | [`3FA-app/3fa-backend.rs`](https://github.com/3FA-app/3fa-backend.rs) | `backend` | authenticated backend and device/sync APIs |
 | [`3FA-app/3fa-web-server.rs`](https://github.com/3FA-app/3fa-web-server.rs) | `web` | web-facing Rust service |
 | [`3FA-app/3FA-desktop.rs`](https://github.com/3FA-app/3FA-desktop.rs) | `desktop` | desktop authenticator application |
@@ -63,6 +74,6 @@ The board should contain exactly one reciprocal field for `Linear issue`, `Linea
 
 ## Work-item propagation
 
-A repository branch and pull request should include the owning Linear identifier when one exists, for example `DEN-2439`. Pull-request bodies should link the Linear issue, state the repository role, list exact validation evidence, and identify any GitHub Project item when the authorized Projects integration is available.
+A repository branch and pull request should include the owning Linear identifier when one exists, for example `DEN-3205`. Pull-request bodies should link the Linear issue, state the repository role, list exact validation evidence, and identify any GitHub Project item when the authorized Projects integration is available.
 
 Documentation changes follow the organization branching and semantic-conflict policy. Project metadata never overrides failed checks, unresolved reviews, missing environment approvals, or contradictory evidence.
