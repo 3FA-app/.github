@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/3FA-app/.github/raw/main/schema/project-registry-artifact.schema.json",
+  "title": "ThreeFaProjectRegistryArtifact",
+  "description": "Deterministic, public-safe delivery artifact generated from the canonical 3FA-app organization routing projection.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "artifactVersion",
+    "verifiedAt",
+    "source",
+    "github",
+    "linear",
+    "slack",
+    "systemOfRecord",
+    "projectFields",
+    "repositories"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "https://github.com/3FA-app/.github/raw/main/schema/project-registry-artifact.schema.json"
+    },
+    "artifactVersion": { "const": 1 },
+    "verifiedAt": { "type": "string", "format": "date" },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "path", "url"],
+      "properties": {
+        "repository": { "const": "3FA-app/.github" },
+        "path": { "const": "organization-routing.json" },
+        "url": {
+          "const": "https://github.com/3FA-app/.github/blob/main/organization-routing.json"
+        }
+      }
+    },
+    "github": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["organization", "project"],
+      "properties": {
+        "organization": { "type": "object" },
+        "project": { "type": "object" }
+      }
+    },
+    "linear": { "type": "object" },
+    "slack": { "type": "object" },
+    "systemOfRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["planning", "executionBoard", "deliveryEvidence", "dispatch"],
+      "properties": {
+        "planning": { "const": "Linear" },
+        "executionBoard": { "const": "GitHub Project #1" },
+        "deliveryEvidence": { "const": "GitHub repositories" },
+        "dispatch": { "const": "Slack #3fa-app" }
+      }
+    },
+    "projectFields": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "type"],
+        "properties": {
+          "name": { "enum": ["Linear issue", "Linear project", "Repository role"] },
+          "type": { "enum": ["text", "singleSelect"] },
+          "options": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "repositories": {
+      "type": "array",
+      "minItems": 14,
+      "maxItems": 14,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "fullName", "role", "url"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "fullName": { "type": "string", "pattern": "^3FA-app/[^/]+$" },
+          "role": {
+            "enum": ["governance", "interfaces", "clients", "cli", "backend", "web", "desktop", "sync", "infra", "e2e", "mcp", "website", "extension", "monorepo"]
+          },
+          "url": { "type": "string", "format": "uri" }
+        }
+      }
+    }
+  }
+}
