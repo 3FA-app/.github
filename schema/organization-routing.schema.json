@@ -89,8 +89,9 @@
     },
     "repositories": {
       "type": "array",
-      "minItems": 13,
-      "maxItems": 13,
+      "minItems": 14,
+      "maxItems": 14,
+      "uniqueItems": true,
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -98,7 +99,7 @@
         "properties": {
           "name": { "type": "string", "minLength": 1 },
           "fullName": { "type": "string", "pattern": "^3FA-app/[^/]+$" },
-          "role": { "enum": ["governance", "interfaces", "clients", "backend", "web", "desktop", "sync", "infra", "e2e", "mcp", "website", "extension", "monorepo"] }
+          "role": { "enum": ["governance", "interfaces", "clients", "cli", "backend", "web", "desktop", "sync", "infra", "e2e", "mcp", "website", "extension", "monorepo"] }
         }
       }
     }
