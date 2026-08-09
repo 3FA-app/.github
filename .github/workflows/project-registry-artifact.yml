@@ -1,0 +1,82 @@
+name: project-registry-artifact
+
+on:
+  pull_request:
+    paths:
+      - "organization-routing.json"
+      - "ORGANIZATION_ROUTING.md"
+      - "README.md"
+      - "docs/PROJECTS.md"
+      - "schema/organization-routing.schema.json"
+      - "schema/project-registry-artifact.schema.json"
+      - "scripts/build-project-registry.py"
+      - "tests/test_project_registry.py"
+      - ".github/workflows/**"
+  push:
+    branches: [main]
+    paths:
+      - "organization-routing.json"
+      - "ORGANIZATION_ROUTING.md"
+      - "README.md"
+      - "docs/PROJECTS.md"
+      - "schema/organization-routing.schema.json"
+      - "schema/project-registry-artifact.schema.json"
+      - "scripts/build-project-registry.py"
+      - "tests/test_project_registry.py"
+      - ".github/workflows/**"
+  schedule:
+    - cron: "23 8 * * 3"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: project-registry-artifact-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Validate all GitHub Actions workflows
+        uses: docker://rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667 # v1.7.12
+
+      - name: Compile registry generator and tests
+        run: |
+          set -euo pipefail
+          python3 -m py_compile \
+            scripts/build-project-registry.py \
+            tests/test_project_registry.py
+          python3 -m json.tool organization-routing.json >/dev/null
+          python3 -m json.tool schema/organization-routing.schema.json >/dev/null
+          python3 -m json.tool schema/project-registry-artifact.schema.json >/dev/null
+
+      - name: Run project registry regression suite
+        run: python3 -m unittest discover -s tests -p 'test_project_registry.py' -v
+
+      - name: Build deterministic registry bundle
+        run: python3 scripts/build-project-registry.py --output-dir dist/project-registry
+
+      - name: Verify artifact checksums and public-safe contents
+        run: |
+          set -euo pipefail
+          (cd dist/project-registry && sha256sum -c SHA256SUMS)
+          test "$(find dist/project-registry -maxdepth 1 -type f | wc -l)" -eq 3
+          ! grep -RIE \
+            'gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|lin_api_[A-Za-z0-9]{20,}|cfat_[A-Za-z0-9_-]{20,}|BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY' \
+            dist/project-registry
+
+      - name: Upload GitHub and Linear project registry
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: 3fa-app-project-registry-${{ github.sha }}
+          path: dist/project-registry/
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 9

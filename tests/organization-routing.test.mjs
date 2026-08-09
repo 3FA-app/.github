@@ -5,19 +5,22 @@ import test from 'node:test';
 const json = (path) => readFile(path, 'utf8').then(JSON.parse);
 const routing = await json('organization-routing.json');
 const schema = await json('schema/organization-routing.schema.json');
+const artifactSchema = await json('schema/project-registry-artifact.schema.json');
 
 const expectedRepositories = new Map([
   ['.github', 'governance'], ['3fa-interfaces', 'interfaces'], ['3fa-clients', 'clients'],
-  ['3fa-backend.rs', 'backend'], ['3fa-web-server.rs', 'web'], ['3FA-desktop.rs', 'desktop'],
-  ['3fa-app-sync', 'sync'], ['3fa-infra', 'infra'], ['3fa-app-e2e', 'e2e'],
-  ['3FA-mcp-server.rs', 'mcp'], ['3fa-app.github.io', 'website'],
-  ['3fa-app-chrome-extension', 'extension'], ['threefa-monorepo', 'monorepo'],
+  ['3FA-app-cli', 'cli'], ['3fa-backend.rs', 'backend'], ['3fa-web-server.rs', 'web'],
+  ['3FA-desktop.rs', 'desktop'], ['3fa-app-sync', 'sync'], ['3fa-infra', 'infra'],
+  ['3fa-app-e2e', 'e2e'], ['3FA-mcp-server.rs', 'mcp'],
+  ['3fa-app.github.io', 'website'], ['3fa-app-chrome-extension', 'extension'],
+  ['threefa-monorepo', 'monorepo'],
 ]);
 
 test('canonical owner, project, Linear, and Slack identities are exact', () => {
   assert.deepEqual(routing.github.organization, {
     login: '3FA-app', id: 292943121, type: 'Organization', url: 'https://github.com/3FA-app',
   });
+  assert.equal(routing.verifiedAt, '2026-08-08');
   assert.equal(routing.github.project.number, 1);
   assert.equal(routing.github.project.title, '3FA-app-project');
   assert.equal(routing.github.project.url, 'https://github.com/orgs/3FA-app/projects/1');
@@ -55,7 +58,7 @@ test('the local projection uses an opaque locator for the central registry autho
   assert.equal(JSON.stringify(routing).includes(forbiddenPrivateRepository), false);
 });
 
-test('schema pins the same canonical identities and exact inventory size', () => {
+test('schemas pin the same canonical identities, role set, and exact inventory size', () => {
   assert.equal(schema.$schema, 'https://json-schema.org/draft/2020-12/schema');
   assert.equal(schema.properties.github.properties.organization.properties.id.const, 292943121);
   assert.equal(schema.properties.github.properties.project.properties.number.const, 1);
@@ -63,23 +66,39 @@ test('schema pins the same canonical identities and exact inventory size', () =>
   assert.equal(schema.properties.slack.properties.channelId.const, routing.slack.channelId);
   assert.equal(schema.properties.repositories.minItems, expectedRepositories.size);
   assert.equal(schema.properties.repositories.maxItems, expectedRepositories.size);
+  assert.deepEqual(
+    schema.properties.repositories.items.properties.role.enum,
+    [...expectedRepositories.values()],
+  );
+  assert.equal(artifactSchema.properties.artifactVersion.const, 1);
+  assert.equal(artifactSchema.properties.repositories.minItems, expectedRepositories.size);
+  assert.equal(artifactSchema.properties.repositories.maxItems, expectedRepositories.size);
 });
 
 test('permanent routing sources contain no personal-access-token material', async () => {
-  const paths = ['README.md', 'ORG_CONTEXT.md', 'ORGANIZATION_ROUTING.md', 'docs/PROJECTS.md',
-    'organization-routing.json', 'profile/README.md', 'schema/organization-routing.schema.json'];
+  const paths = [
+    'README.md', 'ORG_CONTEXT.md', 'ORGANIZATION_ROUTING.md', 'docs/PROJECTS.md',
+    'organization-routing.json', 'profile/README.md', 'schema/organization-routing.schema.json',
+    'schema/project-registry-artifact.schema.json',
+  ];
   const content = (await Promise.all(paths.map((path) => readFile(path, 'utf8')))).join('\n');
   assert.doesNotMatch(content, /\bgh[pousr]_[A-Za-z0-9_]{20,}\b/u);
   assert.doesNotMatch(content, /github_pat_[A-Za-z0-9_]{20,}/u);
+  assert.doesNotMatch(content, /lin_api_[A-Za-z0-9]{20,}/u);
+  assert.doesNotMatch(content, /cfat_[A-Za-z0-9_-]{20,}/u);
 });
 
-test('documentation preserves Project #1 and forbids duplicate creation', async () => {
-  const [routingDoc, projectDoc] = await Promise.all([
-    readFile('ORGANIZATION_ROUTING.md', 'utf8'), readFile('docs/PROJECTS.md', 'utf8'),
+test('documentation preserves Project #1, CLI routing, and forbids duplicate creation', async () => {
+  const [routingDoc, projectDoc, readme] = await Promise.all([
+    readFile('ORGANIZATION_ROUTING.md', 'utf8'),
+    readFile('docs/PROJECTS.md', 'utf8'),
+    readFile('README.md', 'utf8'),
   ]);
-  for (const content of [routingDoc, projectDoc]) {
+  for (const content of [routingDoc, projectDoc, readme]) {
     assert.match(content, /3FA-app-project/u);
     assert.match(content, /orgs\/3FA-app\/projects\/1/u);
+    assert.match(content, /3FA-app\/3FA-app-cli/u);
+    assert.match(content, /project registry/iu);
     assert.match(content, /(?:Do\s+(?:\*\*)?not(?:\*\*)?|must\s+not)\s+create\s+a\s+duplicate/iu);
     assert.match(content, /DEN-2439/u);
   }
