@@ -18,7 +18,7 @@ Repository-local policy wins when it is stricter or more specific. Existing proj
 
 The canonical execution board is [GitHub Project `3FA-app-project` #1](https://github.com/orgs/3FA-app/projects/1). The planning system of record is the [Linear project `github.com/3FA-app`](https://linear.app/denman/project/githubcom3fa-app-c3db52220894). Projects access reconciliation is tracked in [DEN-2439](https://linear.app/denman/issue/DEN-2439/3fa-app-grant-projects-v2-access-and-reconcile-canonical-project-1) and [GitHub issue #9](https://github.com/3FA-app/.github/issues/9); restricted automation must not create a duplicate board.
 
-The canonical projection currently contains 14 repositories, including [`3FA-app/3FA-app-cli`](https://github.com/3FA-app/3FA-app-cli) with role `cli`. Pull-request and `main` workflows publish a deterministic Markdown/JSON project registry plus SHA-256 checksums as a GitHub Actions artifact.
+Private repository details are intentionally withheld from this public document.
 
 <!-- ore-org-baseline:begin -->
 ## Organization-wide defaults
@@ -42,3 +42,15 @@ GitHub can use supported community-health files from a public organization `.git
 
 Generated managed-policy version: `2026-08-08`.
 <!-- ore-org-baseline:end -->
+
+<!-- BEGIN MANAGED REPOSITORY RELATIONSHIPS v1 -->
+## Repository relationship registry
+
+`3FA-app` declares repository roles, dependency edges, cross-organization capabilities, deployment ownership, and the git-submodule/Zed-package contract:
+
+- [Human-readable map](architecture/REPOSITORY_RELATIONSHIPS.md)
+- [Machine-readable manifest](architecture/repository-relationships.json)
+- [JSON Schema](architecture/repository-relationships.schema.json)
+
+The public registry withholds private repository names and edges.
+<!-- END MANAGED REPOSITORY RELATIONSHIPS v1 -->
