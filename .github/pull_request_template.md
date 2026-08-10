@@ -29,9 +29,10 @@ contract, build, security, and end-to-end evidence as applicable.
 
 - [ ] Remote state was fetched before editing and before pushing.
 - [ ] Concurrent local and remote work was preserved without rewriting history.
-- [ ] Conflicts, if any, were resolved semantically using the merge base, both complete sides, relevant history, tests, contracts, and related repositories.
+- [ ] Conflicts, if any, were resolved semantically using the merge base, both complete sides, 3–10 relevant prior commits when useful, tests, contracts, and related repositories.
 - [ ] No `ours`/`theirs` side was accepted wholesale without conceptual review.
 - [ ] The complete worktree was scanned for unresolved conflict markers.
+- [ ] No destructive or history-rewriting operation was executed or recommended.
 
 ## Final checklist
 
