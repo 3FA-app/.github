@@ -13,6 +13,7 @@ Repository-local policy wins when it is stricter or more specific. Existing proj
 - [Deterministic project registry generator](scripts/build-project-registry.py)
 - [Project registry artifact schema](schema/project-registry-artifact.schema.json)
 - [Project registry artifact workflow](.github/workflows/project-registry-artifact.yml)
+- Canonical CLI and project-registry consumer: [`3FA-app/3FA-app-cli`](https://github.com/3FA-app/3FA-app-cli)
 - [Repository boundaries](REPOSITORY_BOUNDARIES.md)
 - [Branching and GitOps policy](BRANCHING_AND_DEPLOYMENT.md)
 
