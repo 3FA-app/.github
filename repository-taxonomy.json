@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "organization": "3FA-app",
+  "inventory_visibility": "public-only",
+  "governance": {
+    "approval_required": true,
+    "unverified_fields_grant_no_access": true,
+    "separate_admin_deployments": true,
+    "public_registry_excludes_private_repositories": true
+  },
+  "repositories": [
+    {
+      "repository": "3FA-app/.github",
+      "category": "governance",
+      "trust_domain": "shared-library",
+      "source_authority": "canonical",
+      "release_unit": {
+        "kind": "none",
+        "identifiers": [],
+        "status": "unverified"
+      },
+      "deployment_targets": {
+        "environments": [],
+        "vpcs": [],
+        "cloud_identities": [],
+        "status": "unverified"
+      },
+      "database_scope": "none",
+      "lifecycle": "unverified",
+      "review_status": "inferred-needs-review"
+    },
+    {
+      "repository": "3FA-app/3fa-app.github.io",
+      "category": "documentation",
+      "trust_domain": "unverified",
+      "source_authority": "unverified",
+      "release_unit": {
+        "kind": "site",
+        "identifiers": [],
+        "status": "unverified"
+      },
+      "deployment_targets": {
+        "environments": [],
+        "vpcs": [],
+        "cloud_identities": [],
+        "status": "unverified"
+      },
+      "database_scope": "none",
+      "lifecycle": "unverified",
+      "review_status": "inferred-needs-review"
+    },
+    {
+      "repository": "3FA-app/3FA-desktop.rs",
+      "category": "source",
+      "trust_domain": "unverified",
+      "source_authority": "unverified",
+      "release_unit": {
+        "kind": "unverified",
+        "identifiers": [],
+        "status": "unverified"
+      },
+      "deployment_targets": {
+        "environments": [],
+        "vpcs": [],
+        "cloud_identities": [],
+        "status": "unverified"
+      },
+      "database_scope": "unverified",
+      "lifecycle": "unverified",
+      "review_status": "inferred-needs-review"
+    }
+  ]
+}
