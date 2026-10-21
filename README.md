@@ -1,5 +1,7 @@
 # 3FA-app organization defaults
 
+**Organization scripting policy:** [Rust-first scripts and automation](CONTRIBUTING.md#rust-first-scripts-and-automation) — no Python automation scripts; documented Python application exceptions only.
+
 This public `.github` repository contains organization-wide community health files, contributor guidance, shared agent policy, and explicit repository, planning, and delivery contracts.
 
 Repository-local policy wins when it is stricter or more specific. Existing project history must be preserved during consolidation and conflict resolution.
