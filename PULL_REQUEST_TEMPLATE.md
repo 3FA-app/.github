@@ -4,8 +4,10 @@ Describe the problem, intended behavior, and why this repository owns the change
 
 ## Review path
 
-- [ ] All commits are on a non-default branch and this pull request is the only proposed path into the default branch.
+- [ ] All commits are on a non-default branch. Feature PRs target `dev` when present; promotions into `main`/`master` are separate reviewed `dev`-to-production PRs. If no `dev` exists, the PR stays unmerged until the integration-branch policy is resolved.
 - [ ] No generated tool, bot, migration runner, or deployment process writes directly to `main`, `master`, or another protected default branch.
+- [ ] AI-assisted promotion follows [CONTRIBUTING.md](CONTRIBUTING.md): verified exact head SHA, relevant green checks, no unresolved review blockers, and recorded evidence-based confidence above the required threshold (strictly >99.1% for feature-to-`dev`, strictly >99.7% for `dev`-to-production).
+- [ ] A failed, skipped, cancelled, neutral, stale, absent, or never-admitted CI check was **not** counted as a pass; unknown CI budget/access constraints remain blockers, not waivers.
 - [ ] The change is small enough to review, or its staged rollout and follow-up pull requests are identified.
 
 ## Scope and boundaries
